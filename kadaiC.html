@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps example</title>
+    <style>
+      #map_canvas {
+        width: 600px;
+        height: 600px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>課題C Google Maps APIの使用</h1>
+
+    <div id="map_canvas"></div>
+    <script>
+    function initMap() {
+      var myOptions = {
+        zoom: 15,
+        center: {lat: 35.71662, lng: 139.51789},
+        mapTypeId: google.maps.MapTypeId.TERRAIN,
+        disableDefaultUI: true,
+        // Step 4. Customize displayed controls
+        zoomControl: true,
+        mapTypeControl: true,
+        scaleControl: true
+      }
+      var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+      // Step 2. Add custom icon
+
+      var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+
+      var marker = new google.maps.Marker({
+        position: {lat: 35.71662, lng: 139.51789},
+        icon: iconBase + 'flag_maps.png',
+        map: map
+      });
+
+      // Step 3. Add info window
+
+      var contentString = '<div id="content"><h2 id="firstHeading" class="firstHeading">小金井公園</h2><p>説明：大きな敷地に、「江戸東京たてもの園」やテニスコート、ドックランなどの施設を備えた公園。</br>興味を持った理由：子供の頃近くに住んでいて、よく行っていおり、懐かしかったから。</p></div>';
+
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAiV2ZbFIYuD3N4hzGLstSn2e4ZG5A7QlU&callback=initMap"
+    async defer></script>
+  </body>
+</html>
